@@ -8,7 +8,7 @@ from app.models.user import User
 
 router = APIRouter(prefix="/comments", tags=["Comments"])
 
-# ✅ CREATE COMMENT / REPLY
+# CREATE COMMENT / REPLY
 @router.post("/{post_id}")
 def create_comment(
     post_id: int,
@@ -29,12 +29,12 @@ def create_comment(
 
     return {"message": "Comment added"}
 
-# ✅ GET COMMENTS FOR POST
+# GET COMMENTS FOR POST
 @router.get("/{post_id}")
 def get_comments(post_id: int, db: Session = Depends(get_db)):
     return db.query(Comment).filter(Comment.post_id == post_id).all()
 
-# ✅ DELETE COMMENT
+# DELETE COMMENT
 @router.delete("/{comment_id}")
 def delete_comment(
     comment_id: int,

@@ -15,9 +15,8 @@ import os
 router = APIRouter(prefix="/posts", tags=["Posts"])
 
 
-# =========================
-# ✅ CREATE POST
-# =========================
+# CREATE POST
+
 @router.post("/")
 def create_post(
     post: PostCreate,
@@ -37,17 +36,15 @@ def create_post(
     return {"message": "Post created", "post_id": new_post.id}
 
 
-# =========================
-# ✅ GET ALL POSTS
-# =========================
+# GET ALL POSTS
+
 @router.get("/")
 def get_posts(db: Session = Depends(get_db)):
     return db.query(Post).all()
 
 
-# =========================
-# ✅ GET SINGLE POST
-# =========================
+# GET SINGLE POST
+
 @router.get("/{post_id}")
 def get_post(post_id: int, db: Session = Depends(get_db)):
     post = db.query(Post).filter(Post.id == post_id).first()
@@ -58,9 +55,9 @@ def get_post(post_id: int, db: Session = Depends(get_db)):
     return post
 
 
-# =========================
-# ✅ UPDATE POST
-# =========================
+
+# UPDATE POST
+
 @router.put("/{post_id}")
 def update_post(
     post_id: int,
@@ -83,9 +80,8 @@ def update_post(
     return {"message": "Post updated"}
 
 
-# =========================
-# ✅ DELETE POST
-# =========================
+# DELETE POST
+
 @router.delete("/{post_id}")
 def delete_post(
     post_id: int,
@@ -106,9 +102,9 @@ def delete_post(
     return {"message": "Post deleted"}
 
 
-# =========================
-# 🔎 SEARCH POSTS
-# =========================
+
+# SEARCH POSTS
+
 @router.get("/search/")
 def search_posts(
     search: str = "",
@@ -121,9 +117,9 @@ def search_posts(
     return posts
 
 
-# =========================
-# 🔎 FILTER POSTS
-# =========================
+
+# FILTER POSTS
+
 @router.get("/filter/")
 def filter_posts(
     user_id: int = None,
@@ -137,9 +133,9 @@ def filter_posts(
     return query.all()
 
 
-# =========================
-# 📊 ANALYTICS
-# =========================
+
+# ANALYTICS
+
 @router.get("/analytics/")
 def post_analytics(db: Session = Depends(get_db)):
     total_posts = db.query(Post).count()
@@ -149,9 +145,9 @@ def post_analytics(db: Session = Depends(get_db)):
     }
 
 
-# =========================
-# 📁 IMAGE UPLOAD
-# =========================
+
+# IMAGE UPLOAD
+
 @router.post("/upload/")
 def upload_image(file: UploadFile = File(...)):
     os.makedirs("uploads", exist_ok=True)
@@ -164,9 +160,9 @@ def upload_image(file: UploadFile = File(...)):
     return {"filename": file.filename}
 
 
-# =========================
-# 🤖 AI RECOMMENDATION
-# =========================
+
+# AI RECOMMENDATION
+
 @router.get("/recommend/{post_id}")
 def recommend_posts(post_id: int, db: Session = Depends(get_db)):
     posts = db.query(Post).all()
