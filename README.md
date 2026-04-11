@@ -1,6 +1,6 @@
 # Blog API (FastAPI + PostgreSQL)
 
-This is a production-ready backend API designed to power modern blogging platforms. Built with FastAPI, it’s high-performance, easy to scale, and comes packed with features like JWT authentication, nested commenting, and even an AI-driven recommendation engine.
+This is a backend API designed to power modern blogging platforms. Built with FastAPI, it’s high-performance, easy to scale, and comes packed with features like JWT authentication, nested commenting, and even an AI-driven recommendation engine.
 
 ---
 
